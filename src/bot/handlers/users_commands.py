@@ -1,7 +1,7 @@
 from aiogram import Router, types, F
-from aiogram.filters import CommandStart
+from aiogram.filters import CommandStart, Command
 from bot.messages_texts import COMMAND_START
-from services.content_delivery import find_news
+from services.post_generation import generate_post
 
 router = Router()
 
@@ -15,7 +15,6 @@ async def start(message: types.Message):
         #reply_markup=keyboard
     )
 
-# This is a test handler
-@router.message(F.text == 'Search news')
-async def search_news(message: types.Message):
-    news = await find_news()
+@router.message(Command('new_post'))
+async def create_post(message: types.Message):
+    post_data = await generate_post()
