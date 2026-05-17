@@ -1,3 +1,4 @@
+import uuid
 from httpx import AsyncClient
 from schemas.article import ArticleBase
 from feedparser import parse
@@ -13,6 +14,7 @@ async def fetch_rss(url: str):
         for entry in feed.entries:
             articles.append(
                 ArticleBase(
+                    id=uuid.uuid4(),
                     title=entry.title,
                     description=entry.description,
                     link=entry.link,
