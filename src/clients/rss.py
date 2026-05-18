@@ -14,7 +14,7 @@ async def fetch_rss(url: str):
         for entry in feed.entries:
             articles.append(
                 ArticleBase(
-                    id=uuid.uuid4(),
+                    id=str(uuid.uuid4()),
                     title=entry.title,
                     description=entry.description,
                     link=entry.link,
